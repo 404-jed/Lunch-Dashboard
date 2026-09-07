@@ -1,4 +1,6 @@
 # created by virtualenv automatically
 *.log
 .venv/
+.env
 .idea/
+database.db
