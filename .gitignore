@@ -1,0 +1,4 @@
+# created by virtualenv automatically
+*.log
+.venv/
+.idea/
