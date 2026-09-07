@@ -6,6 +6,15 @@
 </head>
 <body>
     <h1>Registration Page</h1>
+
+    <form action="" method="POST">
+        {{ register_form.hidden_tag() }}
+        {{ register_form.email}}
+        {{ register_form.password }}
+        {{ register_form.submit }}
+    </form>
+
+
     <a href={{ url_for("login") }}>Have an account already? Log in.</a>
     <br/>
     <a href={{ url_for("home") }}>go Home?</a>
