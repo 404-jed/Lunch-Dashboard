@@ -1,8 +1,11 @@
 from flask import Flask, render_template, url_for
+
 from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
+
 from flask_login import UserMixin
+
 
 
 app = Flask(__name__)
@@ -18,11 +21,12 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 db = SQLAlchemy(app)
 
 
-
+# creating a column in my database for users
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(80), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
+
 
 @app.route('/')
 def home():
