@@ -1,11 +1,13 @@
 
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, flash, request
+
+
 
 from flask_sqlalchemy import SQLAlchemy, query
 import os
 from dotenv import load_dotenv
 
-from flask_login import UserMixin
+from flask_login import UserMixin, LoginManager, login_required, logout_user, current_user, login_user
 from flask_wtf import FlaskForm
 from wtforms import EmailField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Email, Length,ValidationError
@@ -22,7 +24,6 @@ def configure():
 # general web menu database
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-
 db = SQLAlchemy(app)
 
 
@@ -98,10 +99,48 @@ def register():
 
     return render_template("register.html", register_form=register_form)
 
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.get(User, str(user_id))
+
+
 @app.route("/login", methods=["GET","POST"])
 def login():
     login_form = LoginForm()
+
+    user = db.session.execute(db.select(User).where(User.email == login_form.email.data)).scalar_one_or_none()
+    if login_form.validate_on_submit():
+        login_user(user)
+        flash("Logged in successfully")
+
+        next_page = request.args.get("next")
+
+        return redirect(next_page or url_for("dashboard"))
+
+
     return render_template("login.html", login_form=login_form)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    redirect("home")
+
+
+# @login_required: can only access dashboard if logged in.
+@app.route(f"/dashboard", methods=["GET","POST"])
+@login_required
+def dashboard():
+    return render_template("dashboard.html")
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
