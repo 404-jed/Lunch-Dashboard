@@ -1,13 +1,9 @@
-
 from flask import Flask, render_template, url_for, redirect, flash, request
-
-
-
-from flask_sqlalchemy import SQLAlchemy, query
+from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
 
-from flask_login import UserMixin, LoginManager, login_required, logout_user, current_user, login_user
+from flask_login import UserMixin, LoginManager, login_required, logout_user, login_user
 from flask_wtf import FlaskForm
 from wtforms import EmailField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Email, Length,ValidationError
@@ -135,11 +131,8 @@ def logout():
 @app.route(f"/dashboard", methods=["GET","POST"])
 @login_required
 def dashboard():
+
     return render_template("dashboard.html")
-
-
-
-
 
 
 if __name__ == '__main__':
