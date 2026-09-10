@@ -132,15 +132,32 @@ def login():
 @login_required
 def logout():
     logout_user()
-    redirect("home")
+    return redirect(url_for("home"))
 
 
 # @login_required: can only access dashboard if logged in.
-@app.route(f"/dashboard", methods=["GET","POST"])
+@app.route("/dashboard", methods=["GET","POST"])
 @login_required
 def dashboard():
 
+    if current_user.role == "worker":
+        return redirect(url_for("worker_dashboard"))
+
+    elif current_user.role == "student":
+        return redirect(url_for("student_dashboard"))
+
+
+@app.route("/dashboard/student")
+@login_required
+def student_dashboard():
+
     return render_template("dashboard.html")
+
+@app.route("/dashboard/worker")
+@login_required
+def worker_dashboard():
+    return render_template("dashboard.html")
+
 
 
 if __name__ == '__main__':
