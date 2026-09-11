@@ -5,10 +5,15 @@
     <title>CodeRVA Lunch Menu Dashboard</title>
 </head>
 <body>
-    <h1>Welcome {{ current_user.role.capitalize() }}</h1>
-    <h1>CodeRVA High School's Lunch Dashboard</h1>
+    <h1>CodeRVA High School's Lunch Dashboard<br/>
+        Welcome, {{ user_role.capitalize() }}!</h1>
 
     <a href={{ url_for("logout") }}>Logout</a>
+
+
+
+
+
 
 </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 from flask import Flask, render_template, url_for, redirect, flash, request
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -31,6 +29,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(254), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
     role = db.Column(db.String(), nullable=False)
+
+
+
 
 
 
@@ -91,7 +92,7 @@ def register():
     # On form submission our hashed password and unique user will be added and commited into the database
     if register_form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(password=register_form.password.data)
-        user_role = "worker" if register_form.email.data.split('@')[-1] == "coderva.org" else "student"
+        user_role = "student" if register_form.email.data.split('@')[-1] == "students.coderva.org" else "worker"
         unique_user = User(email=register_form.email.data, password=hashed_password, role=user_role)
 
 
@@ -150,13 +151,17 @@ def dashboard():
 @app.route("/dashboard/student")
 @login_required
 def student_dashboard():
+    user_role = current_user.role
 
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", user_role=user_role)
 
 @app.route("/dashboard/worker")
 @login_required
 def worker_dashboard():
-    return render_template("dashboard.html")
+    user_role = current_user.role
+
+    return render_template("dashboard.html", user_role=user_role)
+
 
 
 
