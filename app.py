@@ -31,6 +31,14 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(), nullable=False)
 
 
+class Food(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(254), unique=True)
+    calories = db.Column(db.Integer)
+    carbs = db.Column(db.Integer)
+    ingredients = db.Column(db.String())
+    allergens = db.Column(db.String())
+
 
 
 

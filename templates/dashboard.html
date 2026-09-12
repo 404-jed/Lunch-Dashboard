@@ -5,10 +5,76 @@
     <title>CodeRVA Lunch Menu Dashboard</title>
 </head>
 <body>
-    <h1>CodeRVA High School's Lunch Dashboard<br/>
-        Welcome, {{ user_role.capitalize() }}!</h1>
+    <header id="overview">
+        <h1>CodeRVA High School's Lunch Dashboard</h1>
+        <h2>Welcome, {{ user_role.capitalize() }}!</h2>
+    </header>
 
-    <a href={{ url_for("logout") }}>Logout</a>
+
+    <main>
+
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href={{ url_for("logout") }}>Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <section id="menu">
+
+            <h2>Weekly Menu</h2>
+
+
+            <div id="calendar-cards">
+
+                <!--Monday-->
+                <div class="calender-card1">
+
+                    <!--The day-->
+                    <h3>{{  }}</h3>
+
+                    <!--For each meal display the meals + details (name, calories, ingredients, etc.)-->
+                    {% for x in range(5)%}
+                        <div class="meal">
+
+                        </div>
+                    {% endfor %}
+
+                    <!-- Special permissions for workers-->
+                    {% if user_role == "worker" %}
+                        <a href="">[Edit Menu]</a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="arrow-left"></div>
+            <div class="arrow-right"></div>
+
+
+
+
+        </section>
+
+        <section>
+
+        </section>
+
+    </main>
+
+
+
+
+
+
+
+
+
 
 
 
