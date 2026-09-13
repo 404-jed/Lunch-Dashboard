@@ -12,71 +12,88 @@
 
 
     <main>
+        <div id="sidebar">
+            <aside>
+                <nav>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href={{ url_for("logout") }}>Logout</a></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
 
-        <aside>
-            <nav>
-                <ul>
-                    <li><a href="#overview">Overview</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href={{ url_for("logout") }}>Logout</a></li>
-                </ul>
-            </nav>
-        </aside>
 
         <section id="menu">
 
             <h2>Weekly Menu</h2>
 
+            <div id="weekly-menu">
 
-            <div id="calendar-cards">
+                <h2>September</h2>
 
-                <!--Monday-->
-                <div class="calender-card1">
 
-                    <!--The day-->
-                    <h3>{{  }}</h3>
+                <div id="weekly-menu-cards">
 
-                    <!--For each meal display the meals + details (name, calories, ingredients, etc.)-->
-                    {% for x in range(5)%}
-                        <div class="meal">
+                    <!--Monday-->
+                    <div class="day-card1">
 
-                        </div>
-                    {% endfor %}
+                        <!--The day-->
+                        <h3>Monday</h3>
+                        <h4>9/13/2026</h4>
 
-                    <!-- Special permissions for workers-->
-                    {% if user_role == "worker" %}
-                        <a href="">[Edit Menu]</a>
-                    {% endif %}
+                        <!--For each meal display the meals + details (name, calories, ingredients, etc.)-->
+                        {% for x in range(5)%}
+                            <div class="meal">
+
+                            </div>
+                        {% endfor %}
+
+                        <!-- Special permissions for workers-->
+                        {% if user_role == "worker" %}
+                            <!-- Dropdown options come from the Food table -->
+                            <!-- MenuItem stores the selected food and its menu details -->
+                            <!-- Menu displays MenuItems -->
+
+                            <!-- Food -- MenuItem -- Menu -->
+                            <form action="" method="POST" >
+
+                                <label for="edit-menu">Add to menu:</label>
+
+                                <select id="edit-menu" name="edit-menu">
+
+                                    {% for x in range(5) %}
+                                        <option>{{ x }}</option>
+                                    {% endfor %}
+
+                                </select>
+
+                                <input type="submit" value="Select Food">
+
+                            </form>
+
+
+
+
+                        {% endif %}
+                    </div>
+
+
+                </div>
+
+                <div class="arrow-left">
+
+                </div>
+
+                <div class="arrow-right">
 
                 </div>
 
             </div>
-
-
-            <div class="arrow-left"></div>
-            <div class="arrow-right"></div>
-
-
-
-
-        </section>
-
-        <section>
-
         </section>
 
     </main>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

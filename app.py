@@ -35,9 +35,11 @@ class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(254), unique=True)
     calories = db.Column(db.Integer)
-    carbs = db.Column(db.Integer)
     ingredients = db.Column(db.String())
-    allergens = db.Column(db.String())
+
+class MenuItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
 
 
 
@@ -156,14 +158,14 @@ def dashboard():
         return redirect(url_for("student_dashboard"))
 
 
-@app.route("/dashboard/student")
+@app.route("/dashboard/student", methods=["GET","POST"])
 @login_required
 def student_dashboard():
     user_role = current_user.role
 
     return render_template("dashboard.html", user_role=user_role)
 
-@app.route("/dashboard/worker")
+@app.route("/dashboard/worker", methods=["GET","POST"])
 @login_required
 def worker_dashboard():
     user_role = current_user.role
