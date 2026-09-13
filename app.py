@@ -169,8 +169,13 @@ def student_dashboard():
 @login_required
 def worker_dashboard():
     user_role = current_user.role
+    food = db.session.execute(db.select(Food.name)).scalars().all()
 
-    return render_template("dashboard.html", user_role=user_role)
+
+
+
+
+    return render_template("dashboard.html", user_role=user_role, food=food)
 
 
 

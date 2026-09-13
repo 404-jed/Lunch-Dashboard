@@ -41,7 +41,7 @@
 
                         <!--The day-->
                         <h3>Monday</h3>
-                        <h4>9/13/2026</h4>
+                        <h4>9/14/2026</h4>
 
                         <!--For each meal display the meals + details (name, calories, ingredients, etc.)-->
                         {% for x in range(5)%}
@@ -59,17 +59,21 @@
                             <!-- Food -- MenuItem -- Menu -->
                             <form action="" method="POST" >
 
-                                <label for="edit-menu">Add to menu:</label>
+                                <label for="edit-menu"><strong>Add to menu:</strong></label>
 
                                 <select id="edit-menu" name="edit-menu">
 
-                                    {% for x in range(5) %}
-                                        <option>{{ x }}</option>
+                                    {% for food_item in food %}
+                                        <option>{{ food_item }}</option>
                                     {% endfor %}
 
                                 </select>
 
+                                <!-- For selecting food items to go in MenuItem table -->
                                 <input type="submit" value="Select Food">
+
+                                <!-- For displaying MenuItem on the actual Menu table -->
+                                <input type="submit" value="Finish">
 
                             </form>
 
